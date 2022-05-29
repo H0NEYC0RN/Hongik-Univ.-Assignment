@@ -1,0 +1,240 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+
+public class MainCam : MonoBehaviour
+
+{
+    public Vector3 offset;
+    public Vector3 PressA;
+    public Vector3 PressB;
+    public Vector3 PBR;
+    public Vector3 PressC;
+    public Vector3 PCR;
+
+
+    public GameObject A1;
+    public GameObject A2;
+    public GameObject A3;
+    public GameObject Coffee;
+
+    public GameObject B1;
+    public GameObject B2;
+
+    public GameObject C1;
+
+    public bool actionA;
+    public bool actionB;
+    public bool actionC;
+    public bool isFaded;
+    public bool isMinigame;
+
+    public Animator AM1;
+    public Animator AM2;
+
+    //UI 오브젝트
+    public Image FadeUI;
+    public GameObject MainUI;
+    public GameObject AE;
+    public GameObject BE;
+    public GameObject CE;
+    public GameObject ESCtext;
+    public GameObject Minigame;
+
+    Color c;
+
+    public bool PressE;
+
+    void Start()
+    {
+        Refresh();
+    }
+
+    void Refresh()
+    {
+        transform.position = offset;
+        transform.rotation = Quaternion.Euler(new Vector3(0, -21.327f, 0));
+        actionA = false;
+        actionB = false;
+        actionC = false;
+        isFaded = false;
+        isMinigame = false;
+        A3.SetActive(false);
+        B1.SetActive(false);
+        MainUI.SetActive(true);
+        AE.SetActive(false);
+        BE.SetActive(false);
+        CE.SetActive(false);
+        ESCtext.SetActive(false);
+        Minigame.SetActive(false);
+
+        AM1 = A1.GetComponent<Animator>();
+        AM2 = B2.GetComponent<Animator>();
+        Coffee.SetActive(false);
+    }
+
+    void AC1()
+    {
+        AM1.SetBool("isActive", false);
+        A3.SetActive(true);
+        A2.SetActive(false);
+    }
+
+
+    void AC2()
+    {
+        AM2.SetBool("isActive", false);
+    }
+
+    void CoffeeT()
+    {
+        Coffee.SetActive(true);
+    }
+
+    void CoffeeF()
+    {
+        Coffee.SetActive(false);
+    }
+
+
+    IEnumerator InFadeUI()
+    {
+        float StartAlpha = 0;
+        while (StartAlpha < 1.0f)
+        {
+            StartAlpha += 0.01f;
+            yield return new WaitForSeconds(0.01f);
+            FadeUI.color = new Color(0, 0, 0, StartAlpha);
+            
+            if (StartAlpha == 1)
+            {
+                yield break;
+            }
+        }
+    }
+    
+    IEnumerator OUTFadeUI()
+    {
+        float StartAlpha = 1;
+        while (StartAlpha >= 0.0f)
+        {
+            StartAlpha -= 0.01f;
+            yield return new WaitForSeconds(0.01f);
+            FadeUI.color = new Color(0, 0, 0, StartAlpha);
+            if (StartAlpha == 0)
+            {
+                yield break;
+            }
+        }
+    }
+
+    void Fadeout()
+    {
+        StartCoroutine(OUTFadeUI());
+    }
+
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            transform.position = PressA;
+            transform.rotation = Quaternion.Euler(new Vector3(0, -21.327f, 0));
+
+            actionA = true;
+            actionB = false;
+            actionC = false;
+
+            MainUI.SetActive(false);
+            AE.SetActive(true);
+            BE.SetActive(false);
+            CE.SetActive(false);
+            ESCtext.SetActive(true);
+            Minigame.SetActive(false);
+            isMinigame = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            transform.position = PressB;
+            transform.rotation = Quaternion.Euler(PBR);
+
+            actionA = false;
+            actionB = true;
+            actionC = false;
+            MainUI.SetActive(false);
+            AE.SetActive(false);
+            BE.SetActive(true);
+            CE.SetActive(false);
+            ESCtext.SetActive(true);
+            Minigame.SetActive(false);
+            isMinigame = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            transform.position = PressC;
+            transform.rotation = Quaternion.Euler(PCR);
+
+            actionA = false;
+            actionB = false;
+            actionC = true;
+            MainUI.SetActive(false);
+            AE.SetActive(false);
+            BE.SetActive(false);
+            CE.SetActive(true);
+            ESCtext.SetActive(true);
+            Minigame.SetActive(false);
+            isMinigame = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (actionA == true)
+            {
+                AM1.SetBool("isActive", true);
+                Invoke("CoffeeT", 1.3f);
+                Invoke("CoffeeF", 2.0f);
+                Invoke("AC1", 2);
+                AE.SetActive(false);
+            }
+
+            if (actionB == true)
+            {
+                B1.SetActive(true);
+                AM2.SetBool("isActive", true);
+                Invoke("AC2", 5);
+                BE.SetActive(false);
+            }
+
+            if (actionC == true)
+            {
+                StartCoroutine(InFadeUI());
+                Invoke("Fadeout", 2);
+                CE.SetActive(false);
+
+            }
+            if (isMinigame == true)
+            {
+                SceneManager.LoadScene("Render");
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Refresh();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+                if (actionB == true)
+                {
+                    Minigame.SetActive(true);
+                    isMinigame = true;
+                }
+        }
+    }
+}
