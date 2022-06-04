@@ -1,0 +1,11 @@
+#Python / Colab 에서 작성됨
+
+#단어수 검사기
+print("검사하고 싶은 문장을 입력하세요.\n(띄어쓰기 단위로 검사됩니다.)\n")
+Sentence = input()
+
+Check = Sentence.split() #Sentence를 띄어쓰기, 줄바꿈을 기준으로 잘라 Check 리스트로 만듬
+print("\n입력된 문장은 다음과 같습니다.\n")
+print(Sentence)
+print("\n검사된 단어 : ",Check)
+print("단어 ",len(Check),"개") #Check 리스트 내부의 요소 갯수를 세어 print
