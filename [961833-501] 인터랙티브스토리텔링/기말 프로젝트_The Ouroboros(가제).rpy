@@ -6,71 +6,212 @@ define B = Character('나', color="000000")
 
 init:
 
-    $ Fst = 0
-    $ Scd = 0
-    $ Trd = 0
+    $ F_Fst = 0
+    $ F_Scd = 0
+    $ F_Trd = 0
+
+    $ M_FST = 0
+    $ M_SCT = 0
+    $ M_TRD = 0
+
+    $ F_End = 0
+    $ M_End = 0
 
 label start:
     #Prologue
     F "프롤로그 라인"
+    call Main_1
+
+label Main_1:
+    F "메인 스토리 도입"
     call Select_1
+
 
 #1st Select
 label Select_1:
 
 
-    M "레시피 1번 선택"
+    F "레시피 1번 선택"
 
     menu:
 
         "A": 
-            $ Fst = 1
+            $ F_Fst = 1
             call Select_2
         "B":
-            $ Fst = 2
+            $ F_Fst = 2
             call Select_2
         "C":
-            $ Fst = 3
+            $ F_Fst = 3
             call Select_2
 
 #2nd Select
 label Select_2:
-    M "레시피 2번 선택"
+    F "레시피 2번 선택"
 
     menu:
         "A": 
-            $ Scd = 1
+            $ F_Scd = 1
             call Select_3
         "B":
-            $ Scd = 2
+            $ F_Scd = 2
             call Select_3
         "C":
-            $ Scd = 3
+            $ F_Scd = 3
             call Select_3
 
 #3rd Select
 label Select_3:
-    M "레시피 3번 선택"
+    F "레시피 3번 선택"
 
     menu:
 
         "A": 
-            $ Trd = 1
-            call Select_result
+            $ F_Trd = 1
+            call Select_result_1
         "B":
-            $ Trd = 2
-            call Select_result
+            $ F_Trd = 2
+            call Select_result_1
         "C":
-            $ Trd = 3
-            call Select_result
+            $ F_Trd = 3
+            call Select_result_1
 
-label Select_result:
+label Select_result_1:
+    B "F_레시피 결과"
+
+    if Fst == 1:
+        if Scd == 1 :
+            if Trd == 1:
+                F_End = 1
+                jump Main_2
+            if Trd == 2:
+                jump Select_fail
+            if Trd == 3:
+                jump Select_fail
+        if Scd == 2 :
+            if Trd == 1:
+                jump Select_fail
+            if Trd == 2:
+                jump Select_fail
+            if Trd == 3:
+                jump Select_fail
+        if Scd == 3 :
+            if Trd == 1:
+                jump Select_fail
+            if Trd == 2:
+                jump Select_fail
+            if Trd == 3:
+                jump Select_fail
+
+    if Fst == 2:
+        if Scd == 1 :
+            if Trd == 1:
+                jump Select_fail
+            if Trd == 2:
+                jump Select_fail
+            if Trd == 3:
+                jump Select_fail
+        if Scd == 2 :
+            if Trd == 1:
+                jump Select_fail
+            if Trd == 2:
+                F_End = 2
+                jump Main_1
+            if Trd == 3:
+                jump Select_fail
+        if Scd == 3 :
+            if Trd == 1:
+                jump Select_fail
+            if Trd == 2:
+                jump Select_fail
+            if Trd == 3:
+                jump Select_fail
+
+    if Fst == 3:
+        if Scd == 1 :
+            if Trd == 1:
+                jump Select_fail
+            if Trd == 2:
+                jump Select_fail
+            if Trd == 3:
+                jump Select_fail
+        if Scd == 2 :
+            if Trd == 1:
+                jump Select_fail
+            if Trd == 2:
+                jump Select_fail
+            if Trd == 3:
+                jump Select_fail
+        if Scd == 3 :
+            if Trd == 1:
+                jump Select_fail
+            if Trd == 2:
+                jump Select_fail
+            if Trd == 3:
+                F_End = 3
+                jump Main_2
+
+#Main_2
+label Main_2:
+    F "메인 스토리2 도입"
+    call Select_4
+
+    #1st Select
+label Select_4:
+    F "레시피 1번 선택"
+
+    menu:
+
+        "A": 
+            $ M_Fst = 1
+            call Select_5
+        "B":
+            $ M_Fst = 2
+            call Select_5
+        "C":
+            $ M_Fst = 3
+            call Select_5
+
+#2nd Select
+label Select_5:
+    F "레시피 2번 선택"
+
+    menu:
+        "A": 
+            $ M_Scd = 1
+            call Select_6
+        "B":
+            $ M_Scd = 2
+            call Select_6
+        "C":
+            $ M_Scd = 3
+            call Select_6
+
+#3rd Select
+label Select_6:
+    F "레시피 3번 선택"
+
+    menu:
+
+        "A": 
+            $ M_Trd = 1
+            call Select_result_2
+        "B":
+            $ M_Trd = 2
+            call Select_result_2
+        "C":
+            $ M_Trd = 3
+            call Select_result_2
+
+
+label Select_result_2:
     B "어디보자.."
 
     if Fst == 1:
         if Scd == 1 :
             if Trd == 1:
-                jump Route_1
+                M_End = 1
+                call Main_3
             if Trd == 2:
                 jump Select_fail
             if Trd == 3:
@@ -79,7 +220,7 @@ label Select_result:
             if Trd == 1:
                 jump Select_fail
             if Trd == 2:
-                jump Route_2
+                jump Select_fail
             if Trd == 3:
                 jump Select_fail
         if Scd == 3 :
@@ -88,12 +229,12 @@ label Select_result:
             if Trd == 2:
                 jump Select_fail
             if Trd == 3:
-                jump Route_3
+                jump Select_fail
 
     if Fst == 2:
         if Scd == 1 :
             if Trd == 1:
-                jump Route_4
+                jump Select_fail
             if Trd == 2:
                 jump Select_fail
             if Trd == 3:
@@ -102,7 +243,8 @@ label Select_result:
             if Trd == 1:
                 jump Select_fail
             if Trd == 2:
-                jump Route_5
+                M_End = 2
+                call Main_3
             if Trd == 3:
                 jump Select_fail
         if Scd == 3 :
@@ -111,12 +253,12 @@ label Select_result:
             if Trd == 2:
                 jump Select_fail
             if Trd == 3:
-                jump Route_6
+                jump Select_fail
 
     if Fst == 3:
         if Scd == 1 :
             if Trd == 1:
-                jump Route_7
+                jump Select_fail
             if Trd == 2:
                 jump Select_fail
             if Trd == 3:
@@ -125,7 +267,7 @@ label Select_result:
             if Trd == 1:
                 jump Select_fail
             if Trd == 2:
-                jump Route_8
+                jump Select_fail
             if Trd == 3:
                 jump Select_fail
         if Scd == 3 :
@@ -134,8 +276,34 @@ label Select_result:
             if Trd == 2:
                 jump Select_fail
             if Trd == 3:
-                jump Route_9
+                M_End = 3
+                call Main_3
 
+label Main_3:
+    B "메인 스토리 3 도입"
+ 
+    if F_End == 1:
+        if M_End == 1:
+            jump Route_1
+        if M_End == 2:
+            jump Route_4
+        if M_End == 3:
+            jump Route_7
+    if F_End == 2:
+        if M_End == 1:
+            jump Route_2
+        if M_End == 2:
+            jump Route_5
+        if M_End == 3:
+            jump Route_8
+    if F_End == 3:
+        if M_End == 1:
+            jump Route_3
+        if M_End == 2:
+            jump Route_6
+        if M_End == 3:
+            jump Route_9
+    
 
 # F : 1 / M : 1
 label Route_1:
