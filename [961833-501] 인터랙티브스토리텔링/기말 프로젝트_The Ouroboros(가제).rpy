@@ -79,52 +79,52 @@ label Select_3:
 label Select_result_1:
     B "F_레시피 결과"
 
-    if Fst == 1:
-        if Scd == 1 :
-            if Trd == 1:
-                F_End = 1
+    if F_Fst == 1:
+        if F_Scd == 1 :
+            if F_Trd == 1:
+                $ F_End = 1
                 jump Main_2
-            if Trd == 2:
+            if F_Trd == 2:
                 jump Select_fail
-            if Trd == 3:
+            if F_Trd == 3:
                 jump Select_fail
-        if Scd == 2 :
-            if Trd == 1:
+        if F_Scd == 2 :
+            if F_Trd == 1:
                 jump Select_fail
-            if Trd == 2:
+            if F_Trd == 2:
                 jump Select_fail
-            if Trd == 3:
+            if F_Trd == 3:
                 jump Select_fail
-        if Scd == 3 :
-            if Trd == 1:
+        if F_Scd == 3 :
+            if F_Trd == 1:
                 jump Select_fail
-            if Trd == 2:
+            if F_Trd == 2:
                 jump Select_fail
-            if Trd == 3:
+            if F_Trd == 3:
                 jump Select_fail
 
-    if Fst == 2:
-        if Scd == 1 :
-            if Trd == 1:
+    if F_Fst == 2:
+        if F_Scd == 1 :
+            if F_Trd == 1:
                 jump Select_fail
-            if Trd == 2:
+            if F_Trd == 2:
                 jump Select_fail
-            if Trd == 3:
+            if F_Trd == 3:
                 jump Select_fail
-        if Scd == 2 :
-            if Trd == 1:
+        if F_Scd == 2 :
+            if F_Trd == 1:
                 jump Select_fail
-            if Trd == 2:
-                F_End = 2
+            if F_Trd == 2:
+                $ F_End = 2
                 jump Main_1
-            if Trd == 3:
+            if F_Trd == 3:
                 jump Select_fail
-        if Scd == 3 :
-            if Trd == 1:
+        if F_Scd == 3 :
+            if F_Trd == 1:
                 jump Select_fail
-            if Trd == 2:
+            if F_Trd == 2:
                 jump Select_fail
-            if Trd == 3:
+            if F_Trd == 3:
                 jump Select_fail
 
     if Fst == 3:
@@ -148,17 +148,17 @@ label Select_result_1:
             if Trd == 2:
                 jump Select_fail
             if Trd == 3:
-                F_End = 3
+                $ F_End = 3
                 jump Main_2
 
 #Main_2
 label Main_2:
-    F "메인 스토리2 도입"
+    M "메인 스토리2 도입"
     call Select_4
 
     #1st Select
 label Select_4:
-    F "레시피 1번 선택"
+    M "레시피 1번 선택"
 
     menu:
 
@@ -174,7 +174,7 @@ label Select_4:
 
 #2nd Select
 label Select_5:
-    F "레시피 2번 선택"
+    M "레시피 2번 선택"
 
     menu:
         "A": 
@@ -189,7 +189,7 @@ label Select_5:
 
 #3rd Select
 label Select_6:
-    F "레시피 3번 선택"
+    M "레시피 3번 선택"
 
     menu:
 
@@ -205,78 +205,78 @@ label Select_6:
 
 
 label Select_result_2:
-    B "어디보자.."
+    B "M_레시피 결과"
 
-    if Fst == 1:
-        if Scd == 1 :
-            if Trd == 1:
-                M_End = 1
+    if M_Fst == 1:
+        if M_Scd == 1 :
+            if M_Trd == 1:
+                $ M_End = 1
                 call Main_3
-            if Trd == 2:
+            if M_Trd == 2:
                 jump Select_fail
-            if Trd == 3:
+            if M_Trd == 3:
                 jump Select_fail
-        if Scd == 2 :
-            if Trd == 1:
+        if M_Scd == 2 :
+            if M_Trd == 1:
                 jump Select_fail
-            if Trd == 2:
+            if M_Trd == 2:
                 jump Select_fail
-            if Trd == 3:
+            if M_Trd == 3:
                 jump Select_fail
-        if Scd == 3 :
-            if Trd == 1:
+        if M_Scd == 3 :
+            if M_Trd == 1:
                 jump Select_fail
-            if Trd == 2:
+            if M_Trd == 2:
                 jump Select_fail
-            if Trd == 3:
+            if M_Trd == 3:
                 jump Select_fail
 
-    if Fst == 2:
-        if Scd == 1 :
-            if Trd == 1:
+    if M_Fst == 2:
+        if M_Scd == 1 :
+            if M_Trd == 1:
                 jump Select_fail
-            if Trd == 2:
+            if M_Trd == 2:
                 jump Select_fail
-            if Trd == 3:
+            if M_Trd == 3:
                 jump Select_fail
-        if Scd == 2 :
-            if Trd == 1:
+        if M_Scd == 2 :
+            if M_Trd == 1:
                 jump Select_fail
-            if Trd == 2:
-                M_End = 2
+            if M_Trd == 2:
+                $ M_End = 2
                 call Main_3
-            if Trd == 3:
+            if M_Trd == 3:
                 jump Select_fail
-        if Scd == 3 :
-            if Trd == 1:
+        if M_Scd == 3 :
+            if M_Trd == 1:
                 jump Select_fail
-            if Trd == 2:
+            if M_Trd == 2:
                 jump Select_fail
-            if Trd == 3:
+            if M_Trd == 3:
                 jump Select_fail
 
-    if Fst == 3:
-        if Scd == 1 :
-            if Trd == 1:
+    if M_Fst == 3:
+        if M_Scd == 1 :
+            if M_Trd == 1:
                 jump Select_fail
-            if Trd == 2:
+            if M_Trd == 2:
                 jump Select_fail
-            if Trd == 3:
+            if M_Trd == 3:
                 jump Select_fail
-        if Scd == 2 :
-            if Trd == 1:
+        if M_Scd == 2 :
+            if M_Trd == 1:
                 jump Select_fail
-            if Trd == 2:
+            if M_Trd == 2:
                 jump Select_fail
-            if Trd == 3:
+            if M_Trd == 3:
                 jump Select_fail
-        if Scd == 3 :
-            if Trd == 1:
+        if M_Scd == 3 :
+            if M_Trd == 1:
                 jump Select_fail
-            if Trd == 2:
+            if M_Trd == 2:
                 jump Select_fail
-            if Trd == 3:
-                M_End = 3
+            if M_Trd == 3:
+                $ M_End = 3
                 call Main_3
 
 label Main_3:
